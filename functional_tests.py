@@ -20,6 +20,10 @@ class NewVisitorsTest(unittest.TestCase):
     def tearDown(self) -> None:
         self.browser.quit()
 
+    def check_for_row_in_list_table(self, row_text):
+        table = self.browser.find_element(By.ID, 'id_list_table')
+        rows = table.find_elements(By.TAG_NAME, 'tr')
+        self.assertIn(row_text, [row.text for row in rows])
 
     def test_can_start_a_list_and_retrieve_if_later(self):
         """ test can start a list and retrieve if later """
@@ -48,7 +52,7 @@ class NewVisitorsTest(unittest.TestCase):
 
         table = self.browser.find_element(By.ID, 'id_list_table')
         rows = table.find_elements(By.TAG_NAME, 'tr')
-        self.assertIn('1: Buy simple bird', [row.text for row in rows])
+        self.check_for_row_in_list_table('1: Buy simple bird')
 
         # input "Buy birdcage"
         input_box = self.browser.find_element(By.ID, 'id_new_item')
@@ -59,8 +63,8 @@ class NewVisitorsTest(unittest.TestCase):
         # press <Enter> page refreshed and body contains two elements list
         table = self.browser.find_element(By.ID, 'id_list_table')
         rows = table.find_elements(By.TAG_NAME, 'tr')
-        self.assertIn('1: Buy simple bird', [row.text for row in rows])
-        self.assertIn('2: Buy birdcage', [row.text for row in rows])
+        self.check_for_row_in_list_table('1: Buy simple bird')
+        self.check_for_row_in_list_table('2: Buy birdcage')
 
         # site contains unique url for link at the birds list
 

@@ -2,3 +2,4 @@ django-admin.py startproject superlists
 python manage.py runserver
 python manage.py startapp lists
 python manage.py test
+python manage.py makemigrations
