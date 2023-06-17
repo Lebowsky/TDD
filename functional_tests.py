@@ -48,13 +48,19 @@ class NewVisitorsTest(unittest.TestCase):
 
         table = self.browser.find_element(By.ID, 'id_list_table')
         rows = table.find_elements(By.TAG_NAME, 'tr')
-        self.assertTrue(
-            any(row.text == '1: Buy simple bird' for row in rows)
-        )
+        self.assertIn('1: Buy simple bird', [row.text for row in rows])
 
         # input "Buy birdcage"
+        input_box = self.browser.find_element(By.ID, 'id_new_item')
+        input_box.send_keys('Buy birdcage')
+        input_box.send_keys(Keys.ENTER)
+        time.sleep(1)
 
         # press <Enter> page refreshed and body contains two elements list
+        table = self.browser.find_element(By.ID, 'id_list_table')
+        rows = table.find_elements(By.TAG_NAME, 'tr')
+        self.assertIn('1: Buy simple bird', [row.text for row in rows])
+        self.assertIn('2: Buy birdcage', [row.text for row in rows])
 
         # site contains unique url for link at the birds list
 
