@@ -1,0 +1,2 @@
+django-admin.py startproject superlists
+python manage.py runserver
