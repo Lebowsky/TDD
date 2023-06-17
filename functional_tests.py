@@ -16,6 +16,7 @@ class NewVisitorsTest(unittest.TestCase):
 
     def tearDown(self) -> None:
         self.browser.quit()
+        self.fail('Test final')
 
     def test_can_start_a_list_and_retrieve_if_later(self):
         """ test can start a list and retrieve if later """
