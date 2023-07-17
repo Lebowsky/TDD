@@ -19,5 +19,6 @@ from lists import views
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('', view=views.home_page),
+    path('', view=views.home_page, name='home'),
+    path('lists/one-list-in-the-world', view=views.view_list, name='view_list')
 ]
